@@ -63,7 +63,7 @@ class Contacts extends Component {
     return html`
       <div class="social-links card">
         <h3>Contacts</h3>
-        ${contacts.map(app => {
+        ${contacts?.map(app => {
       let contact = app.split(':')[2]
       let nick = contact.substring(0, 32)
 
@@ -112,7 +112,8 @@ export class App extends Component {
       mode: mode,
       profilePubkey: profilePubkey,
       apps: apps,
-      data: {}
+      data: {},
+      error: null
     };
   }
 
@@ -189,7 +190,7 @@ export class App extends Component {
       key = this.state.userPublicKey
     }
 
-    this.fetchProfile(key, () => this.render());
+    //this.fetchProfile(key, () => this.render());
   };
 
   getRelay() {
@@ -204,12 +205,28 @@ export class App extends Component {
     } else {
       return
     }
-    this.fetchProfile(key, this.render.bind(this))
+    // this.fetchProfile(key, this.render.bind(this))
 
-    var profile = await fetch(`/.well-known/nostr/pubkey/${key}/index.json`)
-    var data = await profile.json();
-    console.log('### profile', data)
-    this.setState({ data })
+    var profile
+    try {
+      profile = await fetch(`/.well-known/nostr/pubkey/${key}/index.json`)
+    } catch (e) {
+      console.log('error', e)
+      this.setState({ error: 'Error fetching profile. Please check your network connection and try again.' })
+    }
+
+    try {
+      var data = await profile.json();
+      console.log('### profile', data)
+      this.setState({ data })
+
+    } catch (e) {
+      console.log('error', e)
+      this.setState({ error: 'This profile is not yet set up.' })
+
+    }
+
+
   }
 
   // fetchProfile.js
@@ -265,7 +282,16 @@ export class App extends Component {
   }
 
   render() {
-    const { userPublicKey, fileContent, name, picture, website, about, banner, github, data } = this.state;
+    const { userPublicKey, fileContent, name, picture, website, about, banner, github, data, error } = this.state;
+
+    if (error) {
+      return html`
+      ${error ? html`<div class="error">${error}</div><a href="/">Back</a>` : ''} 
+
+      `
+    }
+
+
     var key
     var me = data?.mainEntity
     if (!me) return
@@ -287,6 +313,7 @@ export class App extends Component {
     console.log(uriWithLabels);
 
     return html`
+
       <div id="container">
 
         <div class="content">
