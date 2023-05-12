@@ -1,6 +1,6 @@
 {
   "name": "nostr-social",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "nostr-social",
   "main": "index.js",
   "scripts": {
@@ -22,6 +22,5 @@
     "url": "https://github.com/github.com/nostr-social/issues"
   },
   "homepage": "https://github.com/github.com/nostr-social#readme",
-  "dependencies": {
-  }
+  "dependencies": {}
 }
