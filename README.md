@@ -1,0 +1,2 @@
+# nostr.social
+nostr.social
