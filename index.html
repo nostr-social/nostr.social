@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <title>NosDAV Profile</title>
+    <script type="application/ld+json" id="data">
+      [
+        {
+          "@id": "",
+          "storage": "https://nosdav.nostr.rocks",
+          "uri": "index.html",
+          "mode": "m",
+          "relays": [
+            "wss://nostr-pub.wellorder.net",
+            "wss://relay.damus.io",
+            "wss://nostr1.tunnelsats.com",
+            "wss://relay.nostr.info",
+            "wss://nostr-relay.wlvs.space",
+            "wss://nostr.zebedee.cloud",
+            "wss://lbrygen.xyz",
+            "wss://nostr.8e23.net",
+            "wss://nostr.xmr.rocks",
+            "wss://xmr.usenostr.org",
+            "wss://relay.roli.social",
+            "wss://relay.nostr.ro",
+            "wss://nostr.swiss-enigma.ch",
+            "wss://btc-Italia.online",
+            "wss://purplepag.es"
+          ],
+          "mainEntity": {
+            "@id": "nostr:pubkey:de7ecd1e2976a6adb2ffa5f4db81a7d812c8bb6698aa00dcf1e76adb55efd645",
+            "@type": "NostrPubkey",
+            "name": "Anonymous",
+            "app": [
+              "https://nosdav.com/todo/",
+              "https://nosdav.com/pastebin/",
+              "https://nosdav.com/bookmarks/"
+            ]
+          }
+        },
+        {
+          "@id": "https://nosdav.com/todo/",
+          "@type": "WebApplication",
+          "label": "NosDAV Todo"
+        },
+        {
+          "@id": "https://nosdav.com/pastebin/",
+          "@type": "WebApplication",
+          "label": "NosDAV Pastebin"
+        },
+        {
+          "@id": "https://nosdav.com/bookmarks/",
+          "@type": "WebApplication",
+          "label": "NosDAV Bookmarks"
+        }
+      ]
+    </script>
+    <script type="module" src="./app.js"></script>
+  </head>
+  <body></body>
+</html>
