@@ -1,6 +1,6 @@
 {
   "name": "nostr-social",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "nostr-social",
   "main": "index.js",
   "scripts": {
