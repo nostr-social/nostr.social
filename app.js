@@ -16,28 +16,7 @@ function doc() {
   }
 }
 
-function awaitForNostr() {
-  return new Promise(resolve => {
-    let intervalTime = 2;
-    const maxIntervalTime = 500;
-    const maxElapsedTime = 5000;
-    let elapsedTime = 0;
-    const intervalId = setInterval(() => {
-      console.log(intervalTime, elapsedTime)
-      elapsedTime += intervalTime;
-      if (typeof window.nostr !== 'undefined') {
-        console.log('nostr found')
-        clearInterval(intervalId);
-        resolve();
-      } else if (elapsedTime >= maxElapsedTime) {
-        clearInterval(intervalId);
-        resolve();
-      } else {
-        intervalTime = Math.min(intervalTime * 1.5, maxIntervalTime);
-      }
-    }, intervalTime);
-  });
-}
+
 
 class UserProfile extends Component {
   render() {
@@ -74,9 +53,26 @@ class Contacts extends Component {
       let contact = app.split(':')[2]
       let nick = contact.substring(0, 32)
 
+      // if pubkey is set href is new pubkey
+      // if in canonical directory href is ../pubkey/
+      // if in non canonical directory href is /pubkey 
+      function getHref() {
+        let currentPath = new URL(window.location.href).pathname;
+        let pubkey = getQueryStringValue('pubkey');
+
+        if (pubkey) {
+          return `?pubkey=${contact}`
+        } else if (currentPath.includes('/.well-known/nostr/pubkey')) {
+          return `../${contact}/`
+        } else {
+          return `/${contact}`
+        }
+      }
+      var href = getHref()
+
       return html`
           <div class="contact">
-            <a href="?pubkey=${contact}" class="contact-link">${nick}</a>
+            <a href="${href}" class="contact-link">${nick}</a>
           </div>
         `
     })}
