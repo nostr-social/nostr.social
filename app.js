@@ -8,6 +8,13 @@ import './js/dior.js'
 // await awaitForNostr();
 // const userPublicKey = await window.nostr.getPublicKey();
 
+function doc() {
+  if (di.data.length) {
+    return di.data[0]
+  } else {
+    return di.data
+  }
+}
 
 function awaitForNostr() {
   return new Promise(resolve => {
@@ -87,15 +94,15 @@ export class App extends Component {
     super();
     this.fetchProfile = this.fetchProfile.bind(this);
 
-    const serverUrl = getQueryStringValue('storage') || di.data[0].storage || 'https://nosdav.nostr.rocks'
-    const mode = getQueryStringValue('mode') || di.data[0].m || 'm'
-    const uri = getQueryStringValue('uri') || di.data[0].uri || 'profile.json'
+    const serverUrl = getQueryStringValue('storage') || doc().storage || 'https://nosdav.nostr.rocks'
+    const mode = getQueryStringValue('mode') || doc().m || 'm'
+    const uri = getQueryStringValue('uri') || doc().uri || 'profile.json'
 
     const profilePubkey = getQueryStringValue('pubkey')
 
     var key
-    if (di.data[0].mainEntity['@id']) {
-      key = di.data[0].mainEntity['@id'].replace('nostr:pubkey:', '')
+    if (doc().mainEntity['@id']) {
+      key = doc().mainEntity['@id'].replace('nostr:pubkey:', '')
     } else {
       key = this.userPublicKey
     }
@@ -121,7 +128,7 @@ export class App extends Component {
   saveProfile = async () => {
     const { userPublicKey, serverUrl, mode, filename } = this.state;
 
-    di.data[0].mainEntity['@id'] = 'nostr:pubkey:' + userPublicKey;
+    doc().mainEntity['@id'] = 'nostr:pubkey:' + userPublicKey;
 
     async function replaceScriptTagContent() {
       const improvedRegex = /(<script[^>]*type\s*=\s*(['"])application[^>]*\2[^>]*>)([\s\S]*?)(<\/script>)/gim;
@@ -174,18 +181,18 @@ export class App extends Component {
       userPublicKey = this.state.profilePubkey;
     }
     var key
-    if (!di.data[0].mainEntity['@id']) {
-      di.data[0].mainEntity['@id'] = 'nostr:pubkey:' + userPublicKey
+    if (!doc().mainEntity['@id']) {
+      doc().mainEntity['@id'] = 'nostr:pubkey:' + userPublicKey
       key = userPublicKey
     } else {
-      key = di.data[0].mainEntity['@id'].replace('nostr:pubkey:', '')
+      key = doc().mainEntity['@id'].replace('nostr:pubkey:', '')
     }
     console.log(`Logged in with public key: ${userPublicKey}`);
     await this.setState({ userPublicKey: userPublicKey, apps: findNestedObjectById(di.data, 'nostr:pubkey:' + key)?.mainEntity?.app || [] })
     // Use an arrow function here
     var key
-    if (di.data[0].mainEntity && di.data[0].mainEntity['@id']) {
-      key = di.data[0].mainEntity['@id'].replace('nostr:pubkey:', '')
+    if (doc().mainEntity && doc().mainEntity['@id']) {
+      key = doc().mainEntity['@id'].replace('nostr:pubkey:', '')
     } else {
       key = this.state.userPublicKey
     }
@@ -194,14 +201,14 @@ export class App extends Component {
   };
 
   getRelay() {
-    const relay = getQueryStringValue('relay') || di.data[0].relay || 'wss://nostr-pub.wellorder.net';
+    const relay = getQueryStringValue('relay') || doc().relay || 'wss://nostr-pub.wellorder.net';
     return relay
   }
 
   async componentDidMount() {
     var key = 'de7ecd1e2976a6adb2ffa5f4db81a7d812c8bb6698aa00dcf1e76adb55efd645'
-    if (di.data[0].mainEntity && di.data[0].mainEntity['@id']) {
-      key = getQueryStringValue("pubkey") || di.data[0].mainEntity['@id'].replace('nostr:pubkey:', '')
+    if (doc().mainEntity && doc().mainEntity['@id']) {
+      key = getQueryStringValue("pubkey") || doc().mainEntity['@id'].replace('nostr:pubkey:', '')
     } else {
       return
     }
@@ -234,8 +241,8 @@ export class App extends Component {
     const NOSTR_RELAY_URL = this.getRelay()
 
     var key
-    if (di.data[0].mainEntity && di.data[0].mainEntity['@id']) {
-      key = di.data[0].mainEntity['@id'].replace('nostr:pubkey:', '')
+    if (doc().mainEntity && doc().mainEntity['@id']) {
+      key = doc().mainEntity['@id'].replace('nostr:pubkey:', '')
     } else {
       key = this.state.userPublicKey
     }
@@ -266,12 +273,12 @@ export class App extends Component {
           github: content.identities?.[0]?.claim,
         });
 
-        di.data[0].mainEntity.name = content.name
-        di.data[0].mainEntity.image = content.picture
-        di.data[0].mainEntity.url = content.website
-        di.data[0].mainEntity.description = content.about
-        di.data[0].mainEntity.banner = content.banner
-        di.data[0].mainEntity.github = content.identities?.[0]?.claim
+        doc().mainEntity.name = content.name
+        doc().mainEntity.image = content.picture
+        doc().mainEntity.url = content.website
+        doc().mainEntity.description = content.about
+        doc().mainEntity.banner = content.banner
+        doc().mainEntity.github = content.identities?.[0]?.claim
 
 
         render();
@@ -296,8 +303,8 @@ export class App extends Component {
     var me = data?.mainEntity
     if (!me) return
     console.log('### me', me)
-    if (di.data[0].mainEntity && di.data[0].mainEntity['@id']) {
-      key = di.data[0].mainEntity['@id'].replace('nostr:pubkey:', '')
+    if (doc().mainEntity && doc().mainEntity['@id']) {
+      key = doc().mainEntity['@id'].replace('nostr:pubkey:', '')
     } else {
       key = this.state.userPublicKey
     }

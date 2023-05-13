@@ -4,58 +4,58 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./css/style.css" />
-    <title>NosDAV Profile</title>
+    <title>Nostr Social Profile</title>
     <script type="application/ld+json" id="data">
-      [
-        {
-          "@id": "",
-          "storage": "https://nosdav.nostr.rocks",
-          "uri": "index.html",
-          "mode": "m",
-          "relays": [
-            "wss://nostr-pub.wellorder.net",
-            "wss://relay.damus.io",
-            "wss://nostr1.tunnelsats.com",
-            "wss://relay.nostr.info",
-            "wss://nostr-relay.wlvs.space",
-            "wss://nostr.zebedee.cloud",
-            "wss://lbrygen.xyz",
-            "wss://nostr.8e23.net",
-            "wss://nostr.xmr.rocks",
-            "wss://xmr.usenostr.org",
-            "wss://relay.roli.social",
-            "wss://relay.nostr.ro",
-            "wss://nostr.swiss-enigma.ch",
-            "wss://btc-Italia.online",
-            "wss://purplepag.es"
+      {
+        "@id": "",
+        "mainEntity": {
+          "@id": "nostr:pubkey:aa1aa6af6be3a2903e2fb18690d7df128a10eec0f3a015157daf371c688b4cff",
+          "following": [
+            "nostr:pubkey:3efdaebb1d8923ebd99c9e7ace3b4194ab45512e2be79c1b7d68d9243e0d2681",
+            "nostr:pubkey:32e1827635450ebb3c5a7d12c1f8e7b2b514439ac10a67eef3d9fd9c5c68e245",
+            "nostr:pubkey:aa1aa6af6be3a2903e2fb18690d7df128a10eec0f3a015157daf371c688b4cff",
+            "nostr:pubkey:c48e29f04b482cc01ca1f9ef8c86ef8318c059e0e9353235162f080f26e14c11",
+            "nostr:pubkey:92de68b21302fa2137b1cbba7259b8ba967b535a05c6d2b0847d9f35ff3cf56a",
+            "nostr:pubkey:bf2376e17ba4ec269d10fcc996a4746b451152be9031fa48e74553dde5526bce",
+            "nostr:pubkey:cfe3b4316d905335b6ce056ba0ec230b587a334381e82bf9a02a184f2d068f8d",
+            "nostr:pubkey:5b0183ab6c3e322bf4d41c6b3aef98562a144847b7499543727c5539a114563e",
+            "nostr:pubkey:82341f882b6eabcd2ba7f1ef90aad961cf074af15b9ef44a09f9d2a8fbfbe6a2"
           ],
-          "mainEntity": {
-            "@id": "nostr:pubkey:de7ecd1e2976a6adb2ffa5f4db81a7d812c8bb6698aa00dcf1e76adb55efd645",
-            "@type": "NostrPubkey",
-            "name": "Anonymous",
-            "app": [
-              "https://nosdav.com/todo/",
-              "https://nosdav.com/pastebin/",
-              "https://nosdav.com/bookmarks/"
-            ]
-          }
-        },
-        {
-          "@id": "https://nosdav.com/todo/",
-          "@type": "WebApplication",
-          "label": "NosDAV Todo"
-        },
-        {
-          "@id": "https://nosdav.com/pastebin/",
-          "@type": "WebApplication",
-          "label": "NosDAV Pastebin"
-        },
-        {
-          "@id": "https://nosdav.com/bookmarks/",
-          "@type": "WebApplication",
-          "label": "NosDAV Bookmarks"
+          "relay": [
+            {
+              "@id": "wss://nostr.mutinywallet.com",
+              "mode": ["read", "write"]
+            },
+            {
+              "@id": "wss://relay.damus.io",
+              "mode": ["read", "write"]
+            },
+            {
+              "@id": "wss://nostr.wine",
+              "mode": ["read", "write"]
+            },
+            {
+              "@id": "wss://eden.nostr.land",
+              "mode": ["read", "write"]
+            },
+            {
+              "@id": "wss://nos.lol",
+              "mode": ["read", "write"]
+            },
+            {
+              "@id": "wss://relay.snort.social",
+              "mode": ["read", "write"]
+            }
+          ],
+          "banner": "https://nostr.build/p/nb4886.png",
+          "website": "https://footstr.com",
+          "lud16": "scaryfoot72@walletofsatoshi.com",
+          "picture": "https://nostr.build/p/nb4885.png",
+          "display_name": "footstr",
+          "about": "Feet or Other Things & Stuff Transmitted by Relays",
+          "name": "footstr"
         }
-      ]
+      }
     </script>
     <script type="module" src="./app.js"></script>
   </head>
